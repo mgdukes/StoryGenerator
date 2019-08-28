@@ -10,6 +10,7 @@ class StoryMaker
 {
 public:
 	
+	// prompts user to fill in variables
 	void getInput()
 	{
 		cout << "Type in a food, and then press Enter.\n";
@@ -26,25 +27,37 @@ public:
 		place = getAns(place);
 		cout << "Enter an emotion (as in, I am feeling ___).\n";
 		emotion = getAns(emotion);
-		cout << "Enter a utensil.\n";
+		cout << "Enter a utensil or tool.\n";
 		utensil = getAns(utensil);
 		cout << endl;
 	}
 
+	// randomly chooses a story from a given set and returns it filled in with
+	// 	input values
 	string randomStory()
 	{
 		//random number to determine story
-		int randnum = rand() % 2 + 1;
+		int randnum = rand() % 3 + 1;
 		string story;
 
 		switch (randnum)
 		{
+		case 3:
+			story = "There once was a guy named " + name + ".\n"
+				+ "He liked " + food + ". One day, " + name + " was taking a walk\n"
+				+ "in " + place + ", when suddenly he saw a " + creature + "!\n"
+				+ "He watched as it was walking by, until it turned around and said\n\""
+				+ interjection + "! What, you ain't never seen a " + creature + " before?\"\n"
+				+ "It tossed a " + item + " at him in disgust and left. " + name + "\n"
+				+ "was left feeling " + emotion + " and quietly went back to using his " + utensil + ".\n";
+			break;
 		case 2:
 			story = "To become a successful " + creature + " herder,\n"
 				+ "you have to be like the great " + name + " of " + place + ":\n"
 				+ "he fed them plenty of " + food + ", he was skillful with a " + utensil + ",\n"
 				+ "and he was always a " + emotion + " person who wasn't afraid to say \n"
-				+ "\"" + interjection + ", get back here you " + creature + "\n"
+				+ "\"" + interjection + ", get back here you " + creature + "!\"\n"
+				+ "If you treat your " + creature + "s right just like " + name + ", they\n"
 				+ "will love you and give you lots of " + item + "s.\n";
 			break;
 		
@@ -73,14 +86,14 @@ private:
 		do 
 		{
 			getline(cin, ans);
-		} while (ans.length() < 2); //TODO: modify so that single-again answers are allowed
+		} while (ans.length() < 2); //TODO: modify so that single-char answers are allowed
 	return ans;
 	}
 };
 
 
-void clearScreen();
 
+void clearScreen();
 
 int main()
 {
@@ -89,6 +102,7 @@ int main()
 	do
 	{
 		clearScreen();
+		cout << "*******Story Generator*******\n";
 		storymaker.getInput();
 		cout << "Okay, here's your story:\n\n";
 		cout << storymaker.randomStory();
@@ -102,6 +116,7 @@ int main()
 }
 
 
+//clear screen regardless of platform
 void clearScreen()
 {
 	#ifdef WINDOWS
